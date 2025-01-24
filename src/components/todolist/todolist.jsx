@@ -2,17 +2,19 @@ import React from "react";
 import './todolist.css'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-const TaskList = () =>{
+const TaskList = ({tasks, deleteTask}) =>{
     return(
         <div className="todolist">
         <ul>
-          <li>
-            <input type='checkbox'/>
-            <h2>Build this app !</h2>
-            <button>
+          {tasks.map((task)=>(          
+            <li>
+            <input id="Task" type='checkbox' checked={task.status} />
+            <h2>{task.title}</h2>
+            <button onClick={()=>{deleteTask(task.id)}}>
               <DeleteForeverIcon className="delete" />
             </button>
           </li>
+        ))}
         </ul>
       </div>
     )
