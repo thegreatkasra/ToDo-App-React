@@ -1,10 +1,11 @@
 import React from "react";
+import './bottombar.css'
 
 const FilterFooter = () => {
     return (
+        <div className="filterfooter">
         <div>
-        <div>
-          2 items left
+          <span>2 items left</span>
         </div>
         <div>
           <ul>

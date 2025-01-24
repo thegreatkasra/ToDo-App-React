@@ -1,0 +1,25 @@
+.todolist{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 12px 0;
+}
+.todolist ul li{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 8px 16px;
+    border-bottom: 1px solid #808080;
+}
+.todolist ul li h2{
+    text-align: center;
+}
+.todolist ul li button{
+    border: none;
+    color: #808080;
+    cursor: pointer;
+}
+.todolist ul li button:hover{
+    background-color: #808080;
+    color: #000000;
+}

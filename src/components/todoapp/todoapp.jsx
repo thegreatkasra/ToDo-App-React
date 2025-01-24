@@ -1,8 +1,9 @@
 import React from "react";
 import {AddTaskForm, TaskList, FilterFooter} from './../index'
+import './todoapp.css'
 
 const ToDoApp = () =>(
-    <div>
+    <div className="todoapp">
       <AddTaskForm/>
       <TaskList/>
       <FilterFooter/>

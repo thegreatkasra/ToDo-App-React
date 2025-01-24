@@ -1,13 +1,17 @@
 import React from "react";
+import './todolist.css'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const TaskList = () =>{
     return(
-        <div>
+        <div className="todolist">
         <ul>
           <li>
             <input type='checkbox'/>
             <h2>Build this app !</h2>
-            <button>Delete</button>
+            <button>
+              <DeleteForeverIcon className="delete" />
+            </button>
           </li>
         </ul>
       </div>

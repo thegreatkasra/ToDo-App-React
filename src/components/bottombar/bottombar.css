@@ -1,0 +1,25 @@
+.filterfooter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid;
+    padding: 8px ;
+    margin-top:40px;
+}
+.filterfooter span{
+    font-size: 14px;
+    color: #383838;
+}
+.filterfooter ul{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.filterfooter ul li button{
+    border: 0.5px solid #808080;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.filterfooter ul li button:hover{
+    background-color: #808080;
+}

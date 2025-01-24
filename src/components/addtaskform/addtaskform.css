@@ -1,0 +1,23 @@
+.addtaskform{
+    width: 100%;
+    padding: 12px 0;
+}
+.addtaskform form{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.addtaskform input{
+    border: 1px solid;
+    padding: 4px 16px;
+    border-radius: 5px;
+}
+.addtaskform button{
+    border: 1px solid;
+    padding: 4px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
