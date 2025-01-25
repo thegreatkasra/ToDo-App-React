@@ -1,71 +1,67 @@
-import React, {useState, useEffect} from "react";
-import {AddTaskForm, TaskList, FilterFooter} from './../index'
-import './todoapp.css'
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState, useEffect } from "react";
+import { AddTaskForm, TaskList, FilterFooter } from "./../index";
+import "./todoapp.css";
+import { v4 as uuidv4 } from "uuid";
 
-const ToDoApp = () =>{
+const ToDoApp = () => {
+  const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState("all");
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
-  const[tasks, setTasks] = useState([]);
-  const[filter, setFilter] = useState('all');
-  const[filteredTasks, setFilteredTasks] = useState([]);
-  
-
-  useEffect(()=>{
-    if(filter === 'all'){
+  useEffect(() => {
+    if (filter === "all") {
       setFilteredTasks(tasks);
+    } else if (filter === "completed") {
+      setFilteredTasks(tasks.filter((task) => task.status));
+    } else if (filter === "active") {
+      setFilteredTasks(tasks.filter((task) => !task.status));
     }
-    if(filter === 'completed'){
-      const completedTasks = tasks.filter(task => task.status);
-      setFilteredTasks(completedTasks);
-    }
-    if(filter === 'active'){
-      const activedTasks = tasks.filter(task => !task.status);
-      setFilteredTasks(activedTasks);
-    }
+  }, [filter, tasks]);
 
-  }, [filter]);
-
-  useEffect(()=>{
-    setTasks([
-      {
-        id:uuidv4(),
-        title:'defualt task',
-        status: true, //bolean
-      },
-      {
-        id:uuidv4(),
-        title:'defualt task number 2',
-        status: false, //bolean
-      },
-    ])
+  useEffect(() => {
+    let storedTasks = localStorage.getItem("tasks");
+    if (storedTasks) {
+      storedTasks = JSON.parse(storedTasks);
+    } else {
+      storedTasks = [];
+    }
+    setTasks(storedTasks);
   }, []);
 
-
-
-  // add task function
-  const addTask = (taskTitle) =>{
-    setTasks([
+  const addTask = (taskTitle) => {
+    const newTasks = [
       ...tasks,
       {
-        id:uuidv4(),
-        title:taskTitle,
-        status: false, 
-      }
-    ]);
-  }
+        id: uuidv4(),
+        title: taskTitle,
+        status: false,
+      },
+    ];
+    setTasks(newTasks);
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
+  };
 
-  // Delete task function
   const deleteTask = (taskId) => {
     const newTaskList = tasks.filter((task) => task.id !== taskId);
     setTasks(newTaskList);
+    localStorage.setItem("tasks", JSON.stringify(newTaskList));
   };
-  
-  return(
+
+  const handleChangeStatus = (taskId) => {
+    const newTaskList = tasks.map((task) =>
+      task.id === taskId ? { ...task, status: !task.status } : task
+    );
+    setTasks(newTaskList);
+    localStorage.setItem("tasks", JSON.stringify(newTaskList));
+  };
+
+  return (
     <div className="todoapp">
-    <AddTaskForm addTask={addTask} />
-    <TaskList tasks={filteredTasks} deleteTask={deleteTask} />
-    <FilterFooter tasks={filteredTasks} changeFilter={setFilter} />
-  </div>
-  )
-}
+      <AddTaskForm addTask={addTask} />
+      <TaskList tasks={filteredTasks} deleteTask={deleteTask} handleChangeStatus={handleChangeStatus} />
+      <FilterFooter tasks={filteredTasks} changeFilter={setFilter} />
+    </div>
+  );
+};
+
 export default ToDoApp;
